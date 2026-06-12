@@ -1,109 +1,54 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
-import java.util.Iterator;
-
-// Lab 2 - Lists, Stacks, and Queues
-// Your Name: Lukas Cengic
-// Notes: The instructions are found in comments through the code starting with "Step n"
-//        Please leave the comments and add your code just after the comment.
-//        Use the examples in the book to complete the lab.
-
-class Main {
+public class Main {
   public static void main(String[] args) {
-    Lab2 lab = new Lab2();
-    // Comment/Uncomment the following 3 method calls as you work on each method.
-    // No code should be added to the main method. All of your code will go into the methods in Lab2.
-    lab.linkedList();
-    lab.queue();
-    lab.stack();
+    String text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    
+    String bestCase = "A";
+
+    long startTime = System.nanoTime();
+    int index = match(text, bestCase);
+    long endTime = System.nanoTime();
+    long elapsedTime = endTime - startTime;
+    
+    if (index >= 0)
+      System.out.println("best-case input matched at index " + index);
+    else
+      System.out.println("best-case input unmatched");  
+      System.out.println("Best-case elapsed time: " + elapsedTime + "nanoseconds");  
+
+
+    String worstCase = "AXR9C";
+    
+    startTime = System.nanoTime();
+    index = match(text, worstCase);
+    endTime = System.nanoTime();
+    elapsedTime = endTime - startTime;
+    
+    if (index >= 0)
+      System.out.println("worst-case input matched at index " + index);
+    else
+      System.out.println("worst-case input unmatched");  
+      System.out.println("Worst-case elapsed time: " + elapsedTime + "nanoseconds");  
+
   }
-}
 
-class Lab2 {
-  public void linkedList() {
-    // 1. Create a LinkedList<String> object called progLanguages
-  LinkedList<String> progLanguages = new LinkedList<String>();
-
-    // 2. Add elements to progLanguages: "Java", "Python", "JavaScript", "C++"
-progLanguages.add("Java");
-progLanguages.add("Python");
-progLanguages.add("JavaScript");
-progLanguages.add("C++");
-
-    // 3. Remove the element "C++" from the list using .remove()
-progLanguages.remove("C++");
-
-    // 4. Add an element "HTML" at index 2.
-progLanguages.add(2, "HTML");
-
-    // 5. Iterate over progLanguages and use println() to output each element. You must create an Iterator<string> and use hasNext(), and next() similar to the example in our book.
-    Iterator<String> it = progLanguages.iterator();
-    while (it.hasNext())
-    {
-      System.out.println(it.next());
+  // Return the index of the first match. -1 otherwise.
+  public static int match(String text, String pattern) {
+    for (int i = 0; i < text.length() - pattern.length() + 1; i++) {
+      if (isMatched(i, text, pattern))
+        return i;
     }
+
+    return -1;
   }
-  
-  public void queue() {
-    // 6. Create a Queue<String> called q
-Queue<String> q = new LinkedList<String>();
-
-    // 7. Add 5 first names to q.
-q.add("John");
-q.add("James");
-q.add("Jack");
-q.add("Jared");
-q.add("Jason");
-
-    // 8. Uncomment the following line
-    System.out.println("Elements of queue: " + q);
-
-    // 9. Remove the head of the queue and assign it to a String variable removedElement.
-    String removedElement = q.remove();
-    System.out.println("Removed element: " + removedElement);
-
-    // 10. View the head of the queue using peek(). Output it's value.
-System.out.println("Head of queue: " + q.peek());
-
-    // 11. Using for(String element : q), output all of the values in the queue
-for (String element : q)
-{
-  System.out.println(element);
-}
-  }
-
-  public void stack() {
-    // 12. Create a Stack<String> called bookStack
-    Stack<String> bookStack = new Stack<String>();
-
-    // 13. Push the following book titles onto bookStack: "Clean Code", "Design Patterns", "Pragmatic Programmer"
-    bookStack.push("Clean Code");
-    bookStack.push("Design Patterns");
-    bookStack.push("Pragmatic Programmer");
-
-    // 14. pop() 1 book off the stack. Display it's value
-    System.out.println("Popped: " + bookStack.pop());
-
-    // 15. Use the peek() method to view the top book on the stack
-    System.out.println("Top book of the stack: " + bookStack.peek());
-
-    // 16. push() "Web DB Technologies" onto the stack
-    bookStack.push("Web DB Technologies");
-
-    // 17. Use the peek() method to view the top book on the stack
-    System.out.println("New top of the stack: " + bookStack.peek());
-
-    // 18. Search for "Design Patterns" in the stack. Display the results of the search.
-    System.out.println("Results: " + bookStack.search("Design Patterns"));
-
-    // 19. Call empty(). Output the results
-    System.out.println("Results of Empty: " + bookStack.empty());
-
-    // 20. Print the titles of all of the books on the stack
-    for (String book : bookStack)
-    {
-      System.out.println(book);
+	
+  // Test if pattern matches text starting at index i
+  private static boolean isMatched(int i, String text, String pattern) {
+    for (int k = 0; k < pattern.length(); k++) {
+      if (pattern.charAt(k) != text.charAt(i + k)) {
+        return false;
+      }
     }
+    
+    return true;
   }
 }
