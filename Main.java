@@ -1,109 +1,62 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
-import java.util.Iterator;
-
-// Lab 2 - Lists, Stacks, and Queues
-// Your Name: Lukas Cengic
-// Notes: The instructions are found in comments through the code starting with "Step n"
-//        Please leave the comments and add your code just after the comment.
-//        Use the examples in the book to complete the lab.
-
 class Main {
   public static void main(String[] args) {
-    Lab2 lab = new Lab2();
-    // Comment/Uncomment the following 3 method calls as you work on each method.
-    // No code should be added to the main method. All of your code will go into the methods in Lab2.
-    lab.linkedList();
-    lab.queue();
-    lab.stack();
-  }
-}
 
-class Lab2 {
-  public void linkedList() {
-    // 1. Create a LinkedList<String> object called progLanguages
-  LinkedList<String> progLanguages = new LinkedList<String>();
+    // Step 1 - Create a BST tree object called lab5Tree
+    BST<Integer> lab5Tree = new BST<>();
 
-    // 2. Add elements to progLanguages: "Java", "Python", "JavaScript", "C++"
-progLanguages.add("Java");
-progLanguages.add("Python");
-progLanguages.add("JavaScript");
-progLanguages.add("C++");
+    // Step 2 - Insert the following values: 13, 22, 36, 5, 48, 17, 39, 2, 26, 40, 29, 34, 10
+    lab5Tree.insert(13);
+    lab5Tree.insert(22);
+    lab5Tree.insert(36);
+    lab5Tree.insert(5);
+    lab5Tree.insert(48);
+    lab5Tree.insert(17);
+    lab5Tree.insert(39);
+    lab5Tree.insert(2);
+    lab5Tree.insert(26);
+    lab5Tree.insert(40);
+    lab5Tree.insert(29);
+    lab5Tree.insert(34);
+    lab5Tree.insert(10);
 
-    // 3. Remove the element "C++" from the list using .remove()
-progLanguages.remove("C++");
+    // Step 3 - Delete the value 17
+    lab5Tree.delete(17);
 
-    // 4. Add an element "HTML" at index 2.
-progLanguages.add(2, "HTML");
+    // Step 4 - Traverse and output the values using inorder (sorted)
+    System.out.print("Inorder (sorted): ");
+    lab5Tree.inorder();
+    System.out.println();
 
-    // 5. Iterate over progLanguages and use println() to output each element. You must create an Iterator<string> and use hasNext(), and next() similar to the example in our book.
-    Iterator<String> it = progLanguages.iterator();
-    while (it.hasNext())
+    // Step 5 - Traverse and output the values using postorder
+    System.out.print("Postorder: ");
+    lab5Tree.postorder();
+    System.out.println();
+
+    // Step 6 - Traverse and output the values using preorder
+    System.out.print("Preorder: ");
+    lab5Tree.preorder();
+    System.out.println();
+
+    // Step 7 - Display the result of a search for the value 36
+    System.out.println("Search for 36: " + lab5Tree.search(36));
+
+    // Step 8 - Display the result of a search for the value 37
+    System.out.println("Search for 37: " + lab5Tree.search(37));
+
+    // Step 9 - Using the path() method, display the path from the root to 2
+    System.out.print("Path to 2: ");
+    for (BST.TreeNode<Integer> node : lab5Tree.path(2))
     {
-      System.out.println(it.next());
+      System.out.print(node.element + "");
+      System.out.println();
     }
-  }
-  
-  public void queue() {
-    // 6. Create a Queue<String> called q
-Queue<String> q = new LinkedList<String>();
-
-    // 7. Add 5 first names to q.
-q.add("John");
-q.add("James");
-q.add("Jack");
-q.add("Jared");
-q.add("Jason");
-
-    // 8. Uncomment the following line
-    System.out.println("Elements of queue: " + q);
-
-    // 9. Remove the head of the queue and assign it to a String variable removedElement.
-    String removedElement = q.remove();
-    System.out.println("Removed element: " + removedElement);
-
-    // 10. View the head of the queue using peek(). Output it's value.
-System.out.println("Head of queue: " + q.peek());
-
-    // 11. Using for(String element : q), output all of the values in the queue
-for (String element : q)
-{
-  System.out.println(element);
-}
-  }
-
-  public void stack() {
-    // 12. Create a Stack<String> called bookStack
-    Stack<String> bookStack = new Stack<String>();
-
-    // 13. Push the following book titles onto bookStack: "Clean Code", "Design Patterns", "Pragmatic Programmer"
-    bookStack.push("Clean Code");
-    bookStack.push("Design Patterns");
-    bookStack.push("Pragmatic Programmer");
-
-    // 14. pop() 1 book off the stack. Display it's value
-    System.out.println("Popped: " + bookStack.pop());
-
-    // 15. Use the peek() method to view the top book on the stack
-    System.out.println("Top book of the stack: " + bookStack.peek());
-
-    // 16. push() "Web DB Technologies" onto the stack
-    bookStack.push("Web DB Technologies");
-
-    // 17. Use the peek() method to view the top book on the stack
-    System.out.println("New top of the stack: " + bookStack.peek());
-
-    // 18. Search for "Design Patterns" in the stack. Display the results of the search.
-    System.out.println("Results: " + bookStack.search("Design Patterns"));
-
-    // 19. Call empty(). Output the results
-    System.out.println("Results of Empty: " + bookStack.empty());
-
-    // 20. Print the titles of all of the books on the stack
-    for (String book : bookStack)
+   
+    // Step 10 - Display the path from the root to 34
+  System.out.print("Path to 34: ");
+    for (BST.TreeNode<Integer> node : lab5Tree.path(34))
     {
-      System.out.println(book);
+      System.out.print(node.element + "");
+      System.out.println();
     }
   }
 }
