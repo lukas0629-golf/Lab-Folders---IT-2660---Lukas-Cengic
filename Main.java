@@ -1,54 +1,37 @@
-public class Main {
+class Main {
   public static void main(String[] args) {
-    String text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    // Use the instructions in Blackboard or instructions.md to complete Lab 6
     
-    String bestCase = "A";
 
-    long startTime = System.nanoTime();
-    int index = match(text, bestCase);
-    long endTime = System.nanoTime();
-    long elapsedTime = endTime - startTime;
-    
-    if (index >= 0)
-      System.out.println("best-case input matched at index " + index);
-    else
-      System.out.println("best-case input unmatched");  
-      System.out.println("Best-case elapsed time: " + elapsedTime + "nanoseconds");  
+MyHashMap<String, Integer> creditHours = new MyHashMap<>();
 
 
-    String worstCase = "AXR9C";
-    
-    startTime = System.nanoTime();
-    index = match(text, worstCase);
-    endTime = System.nanoTime();
-    elapsedTime = endTime - startTime;
-    
-    if (index >= 0)
-      System.out.println("worst-case input matched at index " + index);
-    else
-      System.out.println("worst-case input unmatched");  
-      System.out.println("Worst-case elapsed time: " + elapsedTime + "nanoseconds");  
+creditHours.put("IT-1025", 3);
+creditHours.put("IT-1050", 3);
+creditHours.put("IT-1150", 3);
+creditHours.put("IT-2310", 3);
+creditHours.put("IT-2320", 4);
+creditHours.put("IT-2351", 4);
+creditHours.put("IT-2650", 4);
+creditHours.put("IT-2660", 4);
+creditHours.put("IT-2030", 4);
 
-  }
 
-  // Return the index of the first match. -1 otherwise.
-  public static int match(String text, String pattern) {
-    for (int i = 0; i < text.length() - pattern.length() + 1; i++) {
-      if (isMatched(i, text, pattern))
-        return i;
-    }
+System.out.println("Contains key IT-1025: " + creditHours.containsKey("IT-1025"));
+System.out.println("Contains key IT-2110: " + creditHours.containsKey("IT-2110"));
 
-    return -1;
-  }
-	
-  // Test if pattern matches text starting at index i
-  private static boolean isMatched(int i, String text, String pattern) {
-    for (int k = 0; k < pattern.length(); k++) {
-      if (pattern.charAt(k) != text.charAt(i + k)) {
-        return false;
-      }
-    }
-    
-    return true;
+
+System.out.println("All creditHours values: " + creditHours);
+
+
+  
+  creditHours.remove("IT-2030");
+  creditHours.remove("IT-1150");
+
+
+
+
+System.out.println("New creditHours values: " + creditHours);
+
   }
 }
